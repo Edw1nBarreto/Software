@@ -1,0 +1,63 @@
+Cohesión Funcional
+-Es el nivel más alto de cohesión. Un módulo tiene cohesión funcional cuando todas sus operaciones contribuyen a una única tarea bien definida.
+--Ejemplo:
+    Una función calcularPromedioNotas() que:
+    Toma una lista de notas
+    Las suma
+    Las divide entre el total
+    Devuelve el promedio
+    Todo en esa función está relacionado con un único propósito: calcular el promedio.
+
+Cohesión Secuencial
+-Ocurre cuando la salida de una operación es la entrada de la siguiente dentro del mismo módulo.
+--Ejemplo:
+    Un módulo que:
+    Lee datos de un archivo
+    Procesa esos datos
+    Escribe el resultado en otro archivo
+    Cada paso depende del anterior.
+
+Cohesión Comunicacional
+-Ocurre cuando las operaciones de un módulo usan los mismos datos de entrada o producen datos relacionados.
+--Ejemplo:
+    Un módulo que:
+    Calcula el total de ventas
+    Calcula el promedio de ventas
+    Genera un gráfico con esos datos
+    Todas estas funciones usan los mismos datos de ventas.
+
+Cohesión Temporal
+-Se da cuando las operaciones se ejecutan al mismo tiempo, normalmente durante una fase específica de ejecución (ej. al inicio del sistema, al cerrar, etc.).
+--Ejemplo:
+    Un módulo inicializarSistema() que:
+    Carga configuración
+    Establece conexión con la base de datos
+    Prepara la interfaz de usuario
+    Estas acciones no están lógicamente relacionadas, pero ocurren juntas al inicio.
+
+Cohesión Procedimental
+-Sucede cuando las operaciones de un módulo siguen una secuencia específica para cumplir una tarea, aunque no necesariamente compartan datos.
+--Ejemplo:
+    Un módulo que:
+    Valida un formulario
+    Muestra mensajes de error
+    Envía los datos si son válidos
+    Hay un flujo lógico, pero las tareas no son tan estrechamente relacionadas como en cohesión funcional.
+
+Cohesión Lógica
+-Un módulo tiene cohesión lógica si contiene operaciones relacionadas lógicamente, pero el módulo decide qué operación ejecutar en función de una condición.
+--Ejemplo:
+    Una función manejarEntradaTeclado(tecla) que:
+    Si es "Enter", envía el formulario
+    Si es "Escape", cancela
+    Si es "Ctrl+S", guarda
+    Están relacionadas porque responden al teclado, pero cada acción es diferente.
+
+Cohesión Casual
+-Es el nivel más bajo de cohesión. Un módulo tiene cohesión casual si sus operaciones no tienen ninguna relación real entre sí. Simplemente están juntas por conveniencia o error.
+--Ejemplo:
+    Una función misc() que:
+    Borra archivos temporales
+    Imprime un mensaje de bienvenida
+    Calcula el promedio de edades
+    No hay ninguna conexión entre las tareas.
