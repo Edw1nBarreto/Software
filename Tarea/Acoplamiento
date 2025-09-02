@@ -26,3 +26,106 @@ Acomplamiento Común
 Acomplamiento de Contenido
 -El peor tipo de acoplamiento. Un módulo accede o modifica directamente el contenido interno de otro módulo, por ejemplo, usando variables internas o saltando a funciones internas.
 🔴🔴 Muy no deseado: viola totalmente el encapsulamiento.
+
+
+---------------------------------------------------------
+
+public class Datos {
+    public static double calcularPromedio(double[] notas) {
+        double suma = 0;
+        for (double nota : notas) {
+            suma += nota;
+        }
+        return suma / notas.length;
+    }
+}
+
+public class Estudiante {
+    public String nombre;
+    public int edad;
+    public double[] notas;
+
+    public Estudiante(String nombre, int edad, double[] notas) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.notas = notas;
+    }
+}
+
+public class Sello {
+    public static void imprimirNombre(Estudiante estudiante) {
+        System.out.println("Nombre: " + estudiante.nombre);
+    }
+}
+
+public class Control {
+    public static void generarReporte(Estudiante est, boolean detallado) {
+        if (detallado) {
+            System.out.println("Estudiante: " + est.nombre + ", Edad: " + est.edad);
+        } else {
+            System.out.println("Estudiante: " + est.nombre);
+        }
+    }
+}
+
+public class Externo {
+    public static void leerConfiguracion(String pathArchivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(pathArchivo))) {
+            String linea = br.readLine();
+            System.out.println("Config: " + linea);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public class RecursosGlobales {
+    public static String modo = "produccion"; // variable global compartida
+}
+
+public class Comun {
+    public static void imprimirModo() {
+        System.out.println("Modo actual: " + RecursosGlobales.modo);
+    }
+}
+
+public class Interno {
+    static String mensajePrivado = "Este es un mensaje privado";
+
+    static void metodoPrivado() {
+        System.out.println("Método privado llamado directamente");
+    }
+}
+
+public class Contenido {
+    public static void accesoDirecto() {
+        // Accediendo directamente al contenido interno de otra clase
+        System.out.println("Acceso indebido: " + Interno.mensajePrivado);
+        Interno.metodoPrivado(); // Llamando método que debería ser privado
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        
+        // Datos - Sólo se pasan datos requeridos
+        double promedio = Datos.calcularPromedio(new double[]{90, 80, 70});
+        System.out.println("Promedio: " + promedio);
+
+        // Sello - Se pasa estructura grande para usar parte
+        Estudiante est = new Estudiante("Juan", 20, new double[]{80, 90});
+        Sello.imprimirNombre(est);
+
+        // Control - Un módulo dicta qué debe hacer el otro
+        Control.generarReporte(est, true);
+
+        // Externo - Dependencia de archivo externo
+        Externo.leerConfiguracion("config.txt");
+
+        // Común - Uso de variable global compartida
+        Comun.imprimirModo();
+
+        // Contenido - Accede directamente a contenido interno
+        Contenido.accesoDirecto();
+    }
+}
