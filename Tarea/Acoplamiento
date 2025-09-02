@@ -1,0 +1,28 @@
+Acomplamiento de Datos
+-Sucede cuando un módulo pasa sólo los datos necesarios a otro módulo (parámetros simples y bien definidos).
+🟢 Deseable: bajo acoplamiento.
+
+
+Acomplamiento de Sello
+-Sucede cuando se pasan estructuras complejas de datos (como objetos o estructuras), aunque no se usen todas sus partes.
+🟡 Regular: puede llevar a mayor dependencia de la estructura interna.
+
+
+Acomplamiento de Control
+- Un módulo controla el comportamiento de otro pasándole banderas o indicadores de cómo debe actuar
+🔴 No deseado: el módulo llamado depende de decisiones externas.
+
+
+Acomplamiento Externo 
+-Sucede cuando los módulos dependen de factores externos al sistema, como sistemas operativos, hardware, formatos de archivos externos, APIs, etc.
+🟡 Aceptable si es necesario, pero debe ser manejado con cuidado.
+
+
+Acomplamiento Común
+-Dos o más módulos comparten variables globales.
+🔴 No deseado: aumenta el riesgo de errores y hace difícil rastrear cambios.
+
+
+Acomplamiento de Contenido
+-El peor tipo de acoplamiento. Un módulo accede o modifica directamente el contenido interno de otro módulo, por ejemplo, usando variables internas o saltando a funciones internas.
+🔴🔴 Muy no deseado: viola totalmente el encapsulamiento.
