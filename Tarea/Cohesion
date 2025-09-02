@@ -61,3 +61,165 @@ Cohesión Casual
     Imprime un mensaje de bienvenida
     Calcula el promedio de edades
     No hay ninguna conexión entre las tareas.
+
+
+----------------------------------------------------------------------------
+
+public class Main {
+    public static void main(String[] args) {
+        // 1. Cohesión Temporal: inicializar el sistema
+        Sistema.inicializarSistema();
+
+        // 2. Cohesión Secuencial: leer, procesar, guardar datos
+        Secuencial.procesarArchivo("estudiantes.txt");
+
+        // 3. Cohesión Comunicacional: múltiples operaciones con los mismos datos
+        Comunicacional.realizarOperacionesEstudiante(new double[]{90, 80, 85});
+
+        // 4. Cohesión Procedimental: validar y guardar
+        Procedimental.procesarFormulario("Juan", "juan@email.com");
+
+        // 5. Cohesión Funcional: una sola tarea bien definida
+        double promedio = Funcional.calcularPromedio(new double[]{70, 80, 90});
+        System.out.println("Promedio: " + promedio);
+
+        // 6. Cohesión Lógica: comportamiento diferente según el evento
+        Logica.manejarEvento("click");
+
+        // 7. Cohesión Casual: operaciones sin relación alguna
+        Casual.operacionesVarias();
+    }
+}
+
+public class Funcional {
+    public static double calcularPromedio(double[] notas) {
+        double suma = 0;
+        for (double nota : notas) {
+            suma += nota;
+        }
+        return suma / notas.length;
+    }
+} //Toda la lógica sirve a un único propósito claro.
+
+public class Secuencial {
+    public static void procesarArchivo(String nombreArchivo) {
+        String datos = leerArchivo(nombreArchivo);
+        String procesado = procesarDatos(datos);
+        guardarDatos(procesado);
+    }
+
+    private static String leerArchivo(String archivo) {
+        System.out.println("Leyendo archivo: " + archivo);
+        return "Juan,90;Ana,85";
+    }
+
+    private static String procesarDatos(String datos) {
+        System.out.println("Procesando datos...");
+        return datos.toUpperCase();
+    }
+
+    private static void guardarDatos(String datos) {
+        System.out.println("Guardando datos: " + datos);
+    }
+} //Cada operación depende de la anterior.
+
+public class Comunicacional {
+    public static void realizarOperacionesEstudiante(double[] notas) {
+        double suma = calcularSuma(notas);
+        double promedio = calcularPromedio(notas);
+        imprimirResumen(suma, promedio);
+    }
+
+    private static double calcularSuma(double[] notas) {
+        double suma = 0;
+        for (double n : notas) suma += n;
+        return suma;
+    }
+
+    private static double calcularPromedio(double[] notas) {
+        return calcularSuma(notas) / notas.length;
+    }
+
+    private static void imprimirResumen(double suma, double promedio) {
+        System.out.println("Suma: " + suma);
+        System.out.println("Promedio: " + promedio);
+    }
+} //Todas las operaciones usan los mismos datos (notas).
+
+public class Sistema {
+    public static void inicializarSistema() {
+        cargarConfiguracion();
+        conectarBaseDeDatos();
+        inicializarComponentes();
+    }
+
+    private static void cargarConfiguracion() {
+        System.out.println("Cargando configuración...");
+    }
+
+    private static void conectarBaseDeDatos() {
+        System.out.println("Conectando a la base de datos...");
+    }
+
+    private static void inicializarComponentes() {
+        System.out.println("Inicializando componentes...");
+    }
+} //Tareas que ocurren juntas al inicio, pero no están lógicamente relacionadas.
+
+public class Procedimental {
+    public static void procesarFormulario(String nombre, String email) {
+        if (validar(nombre, email)) {
+            guardar(nombre, email);
+        } else {
+            System.out.println("Datos inválidos");
+        }
+    }
+
+    private static boolean validar(String nombre, String email) {
+        return !nombre.isEmpty() && email.contains("@");
+    }
+
+    private static void guardar(String nombre, String email) {
+        System.out.println("Guardando: " + nombre + " (" + email + ")");
+    }
+} //Las operaciones siguen un flujo lógico, pero son distintas
+
+public class Logica {
+    public static void manejarEvento(String tipoEvento) {
+        if (tipoEvento.equals("click")) {
+            manejarClick();
+        } else if (tipoEvento.equals("tecla")) {
+            manejarTeclado();
+        } else {
+            System.out.println("Evento no reconocido");
+        }
+    }
+
+    private static void manejarClick() {
+        System.out.println("Click manejado");
+    }
+
+    private static void manejarTeclado() {
+        System.out.println("Tecla manejada");
+    }
+} //Diferentes comportamientos bajo una misma interfaz lógica.
+
+public class Casual {
+    public static void operacionesVarias() {
+        limpiarTemporales();
+        mostrarBienvenida();
+        calcularEdadPromedio();
+    }
+
+    private static void limpiarTemporales() {
+        System.out.println("Limpiando archivos temporales...");
+    }
+
+    private static void mostrarBienvenida() {
+        System.out.println("Bienvenido al sistema");
+    }
+
+    private static void calcularEdadPromedio() {
+        System.out.println("Edad promedio: 21");
+    }
+}//Estas operaciones no tienen ninguna relación lógica entre sí.
